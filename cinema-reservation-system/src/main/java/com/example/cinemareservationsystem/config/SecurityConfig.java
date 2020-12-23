@@ -42,5 +42,4 @@ import org.springframework.security.crypto.password.PasswordEncoder;
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }
