@@ -9,7 +9,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
-    private int user_id;
+    private int userId;
 
     @Column
     private String firstName;
@@ -29,8 +29,8 @@ public class User {
     public User() {
     }
 
-    public User(int user_id, String firstName, String lastName, String email, String password) {
-        this.user_id = user_id;
+    public User(int userId, String firstName, String lastName, String email, String password) {
+        this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -45,12 +45,12 @@ public class User {
         this.password = password;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int user_id) {
+        this.userId = user_id;
     }
 
     public String getFirstName() {
@@ -88,7 +88,7 @@ public class User {
     @Override
     public String toString() {
         return "user{" +
-                "user_id=" + user_id +
+                "user_id=" + userId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +

@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 
-@CrossOrigin(origins = "http://localhost:3306")
+@CrossOrigin(origins = "http://localhost:8090")
 @RestController
-@RequestMapping("/api/v1/cinema")
+@RequestMapping("/cinema")
 public class UserController {
 
     private static final Logger log = LoggerFactory.getLogger(UserController.class);

@@ -8,13 +8,15 @@ import java.util.List;
 
 public interface MovieServiceInterface {
 
-    MovieInfoDto create(MovieCreateDto movie, String movieName);
+    MovieInfoDto createMovie(MovieCreateDto movie, String movieName);
 
     List<MovieInfoDto> getAllMovie(Integer pageNo,Integer pageSize, String sortBy);
 
     List<MovieInfoDto> getAllMovie();
 
-    void populateDb(List<Movie> movieList);
+    void deleteMovie (int movieId);
+
+    void updateMovie(Movie movie);
 
     MovieInfoDto findById(Integer id);
 

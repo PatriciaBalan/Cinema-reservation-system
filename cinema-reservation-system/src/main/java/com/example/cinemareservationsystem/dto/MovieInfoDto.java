@@ -2,7 +2,7 @@ package com.example.cinemareservationsystem.dto;
 
 public class MovieInfoDto {
 
-    private int movie_id;
+    private int movieId;
 
     private String movieName;
 
@@ -10,12 +10,12 @@ public class MovieInfoDto {
 
     private int movieRoom;
 
-    public int getMovie_id() {
-        return movie_id;
+    public int getMovieId() {
+        return movieId;
     }
 
-    public void setMovie_id(int movie_id) {
-        this.movie_id = movie_id;
+    public void setMovieId(int movieId) {
+        this.movieId = movieId;
     }
 
     public String getMovieName() {

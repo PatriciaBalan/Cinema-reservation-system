@@ -1,6 +1,9 @@
 package com.example.cinemareservationsystem.model;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity(name ="Movie")
 @Table(name = "movie")
@@ -9,7 +12,7 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column
-    private int movie_id;
+    private int movieId;
 
     @Column
     private String movieName;
@@ -20,22 +23,25 @@ public class Movie {
     @Column
     private int movieRoom;
 
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
     public Movie() {
     }
 
-    public Movie(int movie_id, String movieName, String movieType, int movieRoom) {
-        this.movie_id = movie_id;
+    public Movie(int movieId, String movieName, String movieType, int movieRoom) {
+        this.movieId = movieId;
         this.movieName = movieName;
         this.movieType = movieType;
         this.movieRoom = movieRoom;
     }
 
-    public int getMovie_id() {
-        return movie_id;
+    public int getMovieId() {
+        return movieId;
     }
 
-    public void setMovie_id(int movie_id) {
-        this.movie_id = movie_id;
+    public void setMovieId(int movie_id) {
+        this.movieId = movie_id;
     }
 
     public String getMovieName() {
@@ -62,10 +68,18 @@ public class Movie {
         this.movieRoom = movieRoom;
     }
 
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
-                "movie_id=" + movie_id +
+                "movie_id=" + movieId +
                 ", movieName='" + movieName + '\'' +
                 ", movieType='" + movieType + '\'' +
                 ", movieRoom=" + movieRoom +

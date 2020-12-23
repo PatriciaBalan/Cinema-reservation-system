@@ -5,6 +5,7 @@ import com.example.cinemareservationsystem.dto.MovieInfoDto;
 import com.example.cinemareservationsystem.model.Movie;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class MovieMapper {
         movie.setMovieName(movieCreateDto.getMovieName());
         movie.setMovieType(movieCreateDto.getMovieType());
         movie.setMovieRoom(movieCreateDto.getMovieRoom());
+        movie.setCreatedAt(LocalDateTime.now());
         return movie;
     }
 

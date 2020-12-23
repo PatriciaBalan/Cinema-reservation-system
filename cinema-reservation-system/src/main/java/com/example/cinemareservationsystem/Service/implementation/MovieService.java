@@ -7,10 +7,8 @@ import com.example.cinemareservationsystem.dto.MovieInfoDto;
 import com.example.cinemareservationsystem.exception.MovieNotFoundException;
 import com.example.cinemareservationsystem.model.Movie;
 import com.example.cinemareservationsystem.repository.MovieRepository;
-import com.example.cinemareservationsystem.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -34,12 +32,12 @@ public class MovieService implements MovieServiceInterface {
     }
 
     @Override
-    public MovieInfoDto create(MovieCreateDto movieCreateDto, String movieName) {
+    public MovieInfoDto createMovie (MovieCreateDto movieCreateDto, String movieName) {
         return movieMapper.toDto(movieRepository.save(movieMapper.toEntity(movieCreateDto, movieName)));
     }
 
     @Override
-    public List<MovieInfoDto> getAllMovie(Integer pageNo,
+    public List<MovieInfoDto> getAllMovie (Integer pageNo,
                                           Integer pageSize,
                                           String sortBy) {
 
@@ -55,8 +53,14 @@ public class MovieService implements MovieServiceInterface {
     }
 
     @Override
-    public void populateDb(List<Movie> movieList) {
-        movieRepository.saveAll(movieList);
+    public void deleteMovie(int movieId) {
+        movieRepository.deleteById(getAllMovie().indexOf(movieId));
+    }
+
+
+    @Override
+    public void updateMovie(Movie movie) {
+        movieRepository.save(movie);
     }
 
     @Override
@@ -68,26 +72,5 @@ public class MovieService implements MovieServiceInterface {
             return movieMapper.toDto(movie.get());
         }
     }
-
-
-//    public List<Movie> getAllMovies() {
-//        List<Movie> list = (List<Movie>) movieRepository.findAll();
-//        return list;
-//    }
-//
-//    public void addMovie(Movie movie) {
-//        movie.setMovieName(new String());
-//        movie.setMovieRoom(new Integer(1));
-//        movie.setMovieType(new String());
-//        movieRepository.save(movie);
-//    }
-//
-//    public Optional<Movie> getMovieInfo(Integer movieId) {
-//
-//        Optional<Movie> movieOptional = movieRepository.findById(movieId);
-//        Movie movie = movieOptional.get();
-//        return movieOptional;
-//    }
-
 
 }
