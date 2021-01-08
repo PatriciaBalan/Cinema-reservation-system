@@ -4,6 +4,7 @@ import com.example.cinemareservationsystem.Service.MovieServiceInterface;
 import com.example.cinemareservationsystem.components.MovieMapper;
 import com.example.cinemareservationsystem.dto.MovieCreateDto;
 import com.example.cinemareservationsystem.dto.MovieInfoDto;
+import com.example.cinemareservationsystem.exception.EntityDoesNotExistsException;
 import com.example.cinemareservationsystem.exception.MovieNotFoundException;
 import com.example.cinemareservationsystem.model.Movie;
 import com.example.cinemareservationsystem.repository.MovieRepository;
@@ -54,14 +55,28 @@ public class MovieService implements MovieServiceInterface {
 
     @Override
     public void deleteMovie(int movieId) {
+        Movie movie = movieRepository.findById(movieId).get();
         movieRepository.deleteById(getAllMovie().indexOf(movieId));
     }
 
+    @Override
+    public void updateMovie(int movieId, String movieName, String movieType, int movieRoom, int seatNumber) {
+        Optional<Movie> movieOptional = movieRepository.findById(movieId);
+        if (!movieOptional.isPresent()) throw new EntityDoesNotExistsException("Movie, id= " + movieId);
+
+        Movie movie = movieOptional.get();
+        movie.setMovieName(movieName);
+        movie.setMovieType(movieType);
+        movie.setMovieRoom(movieRoom);
+        movie.setSeatNumber(seatNumber);
+        movieRepository.save(movie);
+    }
 
     @Override
     public void updateMovie(Movie movie) {
-        movieRepository.save(movie);
+        movieRepository.findById(movie.getMovieId()).ifPresent(this::updateMovie);
     }
+
 
     @Override
     public MovieInfoDto findById(Integer id) {

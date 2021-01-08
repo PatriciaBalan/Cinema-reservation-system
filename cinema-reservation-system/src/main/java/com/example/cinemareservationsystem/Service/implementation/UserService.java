@@ -1,5 +1,6 @@
 package com.example.cinemareservationsystem.Service.implementation;
 
+import com.example.cinemareservationsystem.Service.UserServiceInterface;
 import com.example.cinemareservationsystem.model.User;
 import com.example.cinemareservationsystem.repository.UserRepository;
 import org.slf4j.Logger;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserService {
+public class UserService implements UserServiceInterface {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
 
@@ -37,4 +38,8 @@ public class UserService {
 //        return BCrypt.withDefaults().hashToString(12, password.toCharArray());
 //    }
 
+    @Override
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
 }

@@ -1,6 +1,9 @@
 package com.example.cinemareservationsystem.model;
 
+import org.hibernate.annotations.Nationalized;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity(name = "User")
 @Table(name = "user")
@@ -28,6 +31,9 @@ public class User {
 
     public User() {
     }
+
+    @OneToMany(mappedBy = "role",fetch = FetchType.LAZY)
+    private Set<User> user;
 
     public User(int userId, String firstName, String lastName, String email, String password) {
         this.userId = userId;

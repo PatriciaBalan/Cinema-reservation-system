@@ -10,11 +10,14 @@ public interface MovieServiceInterface {
 
     MovieInfoDto createMovie(MovieCreateDto movie, String movieName);
 
+
     List<MovieInfoDto> getAllMovie(Integer pageNo,Integer pageSize, String sortBy);
 
     List<MovieInfoDto> getAllMovie();
 
     void deleteMovie (int movieId);
+
+    void updateMovie(int movieId, String movieName, String movieType, int movieRoom, int seatNumber);
 
     void updateMovie(Movie movie);
 

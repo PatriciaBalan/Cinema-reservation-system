@@ -4,6 +4,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity(name ="Movie")
 @Table(name = "movie")
@@ -23,17 +24,25 @@ public class Movie {
     @Column
     private int movieRoom;
 
+    @Column
+    private int seatNumber;
+
+    @Column
+    private Date dateMovie;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     public Movie() {
     }
 
-    public Movie(int movieId, String movieName, String movieType, int movieRoom) {
+    public Movie(int movieId, String movieName, String movieType, int movieRoom, Date dateMovie, int seatNumber) {
         this.movieId = movieId;
         this.movieName = movieName;
         this.movieType = movieType;
         this.movieRoom = movieRoom;
+        this.dateMovie = dateMovie;
+        this.seatNumber = seatNumber;
     }
 
     public int getMovieId() {
@@ -76,13 +85,36 @@ public class Movie {
         this.createdAt = createdAt;
     }
 
+    public int getSeatNumber() {
+        return seatNumber;
+    }
+
+    public void setSeatNumber(int seatNumber) {
+        this.seatNumber = seatNumber;
+    }
+
+    public Date getDateMovie() {
+        return dateMovie;
+    }
+
+    public void setDateMovie(Date dateMovie) {
+        this.dateMovie = dateMovie;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
-                "movie_id=" + movieId +
+                "movieId=" + movieId +
                 ", movieName='" + movieName + '\'' +
                 ", movieType='" + movieType + '\'' +
                 ", movieRoom=" + movieRoom +
+                ", seatNumber=" + seatNumber +
+                ", dateMovie=" + dateMovie +
+                ", createdAt=" + createdAt +
                 '}';
     }
 }
+
+
+
+

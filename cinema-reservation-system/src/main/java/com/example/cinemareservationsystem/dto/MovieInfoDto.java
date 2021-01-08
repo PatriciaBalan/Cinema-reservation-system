@@ -1,5 +1,7 @@
 package com.example.cinemareservationsystem.dto;
 
+import java.util.Date;
+
 public class MovieInfoDto {
 
     private int movieId;
@@ -9,6 +11,11 @@ public class MovieInfoDto {
     private String movieType;
 
     private int movieRoom;
+
+    private int seatNumber;
+
+    private Date dateMovie;
+
 
     public int getMovieId() {
         return movieId;
@@ -40,5 +47,21 @@ public class MovieInfoDto {
 
     public void setMovieRoom(int movieRoom) {
         this.movieRoom = movieRoom;
+    }
+
+    public int getSeatNumber() {
+        return seatNumber;
+    }
+
+    public void setSeatNumber(int seatNumber) {
+        this.seatNumber = seatNumber;
+    }
+
+    public Date getDateMovie() {
+        return dateMovie;
+    }
+
+    public void setDateMovie(Date dateMovie) {
+        this.dateMovie = dateMovie;
     }
 }
