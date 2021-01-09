@@ -2,7 +2,13 @@ package com.example.cinemareservationsystem.controller;
 
 
 import com.example.cinemareservationsystem.Service.implementation.UserService;
+import com.example.cinemareservationsystem.dto.MovieCreateDto;
+import com.example.cinemareservationsystem.dto.MovieInfoDto;
+import com.example.cinemareservationsystem.dto.UserCreateDto;
+import com.example.cinemareservationsystem.dto.UserInfoDto;
+import com.example.cinemareservationsystem.model.Movie;
 import com.example.cinemareservationsystem.model.User;
+import com.example.cinemareservationsystem.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin()
 @RestController
 @RequestMapping("/cinema")
 public class UserController {
@@ -20,6 +26,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserRepository userRepository;
 
     @RequestMapping(value="/login", method = RequestMethod.POST)
     public String login(@RequestBody User login, HttpServletResponse response) {
@@ -44,8 +52,22 @@ public class UserController {
         }
     }
 
+
+    @PostMapping(path = "/users/create")
+    public @ResponseBody String createUser(@RequestBody UserCreateDto ucd) {
+        User user = new User ();
+        user.setFirstName(ucd.getFirstName());
+        user.setLastName(ucd.getLastName());
+        user.setEmail(ucd.getEmail());
+        user.setPassword(ucd.getPassword());
+        user.setRole(ucd.getRole());
+        userRepository.save(user);
+        return "Saved";
+    }
+
+
     @GetMapping("/users")
-    public List<User> getAllUsers() {
+    public List<UserInfoDto> getAllUsers() {
         return userService.getAllUsers();
     }
 }

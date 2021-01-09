@@ -1,5 +1,6 @@
 package com.example.cinemareservationsystem.model;
 
+import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.*;
@@ -23,8 +24,8 @@ public class User {
     @Column
     private String email;
 
-    @Column
-    private Enum<Role> role;
+    @ManyToOne
+    private Role role;
 
     @Column
     private String password;
@@ -32,8 +33,8 @@ public class User {
     public User() {
     }
 
-    @OneToMany(mappedBy = "role",fetch = FetchType.LAZY)
-    private Set<User> user;
+//    @OneToMany(mappedBy = "role",fetch = FetchType.LAZY)
+//    private Set<User> user;
 
     public User(int userId, String firstName, String lastName, String email, String password) {
         this.userId = userId;
@@ -83,11 +84,11 @@ public class User {
         this.email = email;
     }
 
-    public Enum<Role> getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(Enum<Role> role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 

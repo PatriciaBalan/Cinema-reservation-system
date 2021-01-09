@@ -55,8 +55,8 @@ public class MovieService implements MovieServiceInterface {
 
     @Override
     public void deleteMovie(int movieId) {
-        Movie movie = movieRepository.findById(movieId).get();
-        movieRepository.deleteById(getAllMovie().indexOf(movieId));
+        movieRepository.findById(movieId).get();
+        movieRepository.deleteById(movieId);
     }
 
     @Override
@@ -74,18 +74,17 @@ public class MovieService implements MovieServiceInterface {
 
     @Override
     public void updateMovie(Movie movie) {
-        movieRepository.findById(movie.getMovieId()).ifPresent(this::updateMovie);
+        movieRepository.findById(movie.getMovieId());
     }
 
 
     @Override
-    public MovieInfoDto findById(Integer id) {
-        Optional<Movie>  movie = movieRepository.findById(id);
+    public MovieInfoDto findById(int movieId) {
+        Optional<Movie>  movie = movieRepository.findById(movieId);
         if (!movie.isPresent()) {
-            throw new MovieNotFoundException("Movie with ID = " + id + " could not be found.");
+            throw new MovieNotFoundException("Movie with ID = " + movieId + " could not be found.");
         } else {
             return movieMapper.toDto(movie.get());
         }
     }
-
 }

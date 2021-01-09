@@ -8,11 +8,38 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 
-    @Configuration
+@Configuration
     @EnableWebSecurity
     public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+//        @Override
+//        protected void configure(HttpSecurity http) throws Exception {
+//            http.authorizeRequests().anyRequest().permitAll();
+//            http.cors().and().csrf().disable();
+//        }
+
+//        @Override
+//        protected void configure(HttpSecurity http) throws Exception{
+//            http.cors().and().csrf().disable();
+//        }
+        @Bean
+        CorsConfigurationSource corsConfigurationSource() {
+            CorsConfiguration configuration = new CorsConfiguration();
+            configuration.setAllowedOrigins(Arrays.asList("*"));
+            configuration.setAllowedMethods(Arrays.asList("*"));
+            configuration.setAllowedHeaders(Arrays.asList("*"));
+            configuration.setAllowCredentials(true);
+            UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+            source.registerCorsConfiguration("/**", configuration);
+            return source;
+        }
 
         @Override
         protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -35,7 +62,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
             .and()
                     .httpBasic();
 
-            http.cors().disable();
+            http.cors().and().csrf().disable();
         }
 
     @Bean

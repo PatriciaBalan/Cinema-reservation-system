@@ -1,6 +1,7 @@
 package com.example.cinemareservationsystem.controller;
 
 import com.example.cinemareservationsystem.Service.implementation.SeatService;
+import com.example.cinemareservationsystem.dto.MovieInfoDto;
 import com.example.cinemareservationsystem.model.Seat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

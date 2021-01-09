@@ -30,19 +30,24 @@ public class Movie {
     @Column
     private Date dateMovie;
 
+    @Column
+    private String priceMovie;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     public Movie() {
     }
 
-    public Movie(int movieId, String movieName, String movieType, int movieRoom, Date dateMovie, int seatNumber) {
+    public Movie(int movieId, String movieName, String movieType,
+                 int movieRoom, Date dateMovie, int seatNumber, String priceMovie) {
         this.movieId = movieId;
         this.movieName = movieName;
         this.movieType = movieType;
         this.movieRoom = movieRoom;
         this.dateMovie = dateMovie;
         this.seatNumber = seatNumber;
+        this.priceMovie = priceMovie;
     }
 
     public int getMovieId() {
@@ -101,6 +106,14 @@ public class Movie {
         this.dateMovie = dateMovie;
     }
 
+    public String getPriceMovie() {
+        return priceMovie;
+    }
+
+    public void setPriceMovie(String priceMovie) {
+        this.priceMovie = priceMovie;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
@@ -111,6 +124,7 @@ public class Movie {
                 ", seatNumber=" + seatNumber +
                 ", dateMovie=" + dateMovie +
                 ", createdAt=" + createdAt +
+                ", priceMovie=" + priceMovie +
                 '}';
     }
 }

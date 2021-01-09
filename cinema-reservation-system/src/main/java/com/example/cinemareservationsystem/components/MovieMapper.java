@@ -16,6 +16,7 @@ public class MovieMapper {
         movie.setMovieName(movieCreateDto.getMovieName());
         movie.setMovieType(movieCreateDto.getMovieType());
         movie.setMovieRoom(movieCreateDto.getMovieRoom());
+        movie.setSeatNumber(movieCreateDto.getSeatNumber());
         movie.setCreatedAt(LocalDateTime.now());
         return movie;
     }
@@ -25,6 +26,7 @@ public class MovieMapper {
         movieInfoDto.setMovieName(movie.getMovieName());
         movieInfoDto.setMovieRoom(movie.getMovieRoom());
         movieInfoDto.setMovieType(movie.getMovieType());
+        movieInfoDto.setSeatNumber(movie.getSeatNumber());
 
         return movieInfoDto;
     }
