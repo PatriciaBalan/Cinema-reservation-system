@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface MovieServiceInterface {
 
-    MovieInfoDto createMovie(MovieCreateDto movie, String movieName);
+    MovieInfoDto createMovie(MovieCreateDto movie);
 
     List<MovieInfoDto> getAllMovie(Integer pageNo,Integer pageSize, String sortBy);
 
@@ -16,13 +16,15 @@ public interface MovieServiceInterface {
 
     MovieInfoDto findById(int movieId);
 
-//    void updateMovie(Movie movie);
-
-    void updateMovie (Movie movie);
+//    void updateMovie (Movie movie);
 
     void deleteMovie (int movieId);
 
-    void updateMovie(int movieId, String movieName, String movieType, int movieRoom, int seatNumber);
-
-
+    void updateMovie (int movieId,
+                     String movieName,
+                     String movieType,
+                     int movieRoom,
+                     int seatNumber,
+                     String dateMovie,
+                      String priceMovie);
 }

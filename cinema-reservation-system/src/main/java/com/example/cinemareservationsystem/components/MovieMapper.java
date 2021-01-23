@@ -11,23 +11,27 @@ import java.util.List;
 
 @Component
 public class MovieMapper {
-    public static Movie toEntity(MovieCreateDto movieCreateDto, String movieName) {
+    public static Movie toEntity(MovieCreateDto movieCreateDto) {
         Movie movie = new Movie();
         movie.setMovieName(movieCreateDto.getMovieName());
         movie.setMovieType(movieCreateDto.getMovieType());
         movie.setMovieRoom(movieCreateDto.getMovieRoom());
         movie.setSeatNumber(movieCreateDto.getSeatNumber());
+        movie.setDateMovie(movieCreateDto.getDateMovie());
+        movie.setPriceMovie(movieCreateDto.getPriceMovie());
         movie.setCreatedAt(LocalDateTime.now());
         return movie;
     }
 
     public static MovieInfoDto toDto(Movie movie) {
         MovieInfoDto movieInfoDto = new MovieInfoDto();
+        movieInfoDto.setMovieId(movie.getMovieId());
         movieInfoDto.setMovieName(movie.getMovieName());
         movieInfoDto.setMovieRoom(movie.getMovieRoom());
         movieInfoDto.setMovieType(movie.getMovieType());
         movieInfoDto.setSeatNumber(movie.getSeatNumber());
-
+        movieInfoDto.setDateMovie(movie.getDateMovie());
+        movieInfoDto.setPriceMovie(movie.getPriceMovie());
         return movieInfoDto;
     }
 

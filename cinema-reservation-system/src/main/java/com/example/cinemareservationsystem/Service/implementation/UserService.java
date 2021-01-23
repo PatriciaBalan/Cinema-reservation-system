@@ -36,6 +36,7 @@ public class UserService implements UserServiceInterface {
         return  userMapper.toDto(userRepository.save(userMapper.toEntity(userCreateDto, firstName)));
     }
 
+
     public String signUp(User user) {
         String status = "Existing User... Please Login !!!";
         List<User> list = userRepository.fetchUserByEmail(user.getEmail());

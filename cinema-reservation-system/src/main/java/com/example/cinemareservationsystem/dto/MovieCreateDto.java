@@ -12,7 +12,9 @@ public class MovieCreateDto {
 
     private int seatNumber;
 
-    private Date dateMovie;
+    private String priceMovie;
+
+    private String dateMovie;
 
     public String getMovieName() {
         return movieName;
@@ -46,11 +48,15 @@ public class MovieCreateDto {
         this.seatNumber = seatNumber;
     }
 
-    public Date getDateMovie() {
+    public String getDateMovie() {
         return dateMovie;
     }
 
-    public void setDateMovie(Date dateMovie) {
+    public void setDateMovie(String dateMovie) {
         this.dateMovie = dateMovie;
     }
+
+    public String getPriceMovie() { return priceMovie; }
+
+    public void setPriceMovie(String priceMovie) { this.priceMovie = priceMovie;}
 }

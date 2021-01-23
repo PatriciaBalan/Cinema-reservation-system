@@ -33,10 +33,10 @@ public class UserController {
     public String login(@RequestBody User login, HttpServletResponse response) {
         String nulls = null;
 
-        return "success";
+        return "{}";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping(path="/users/signup")
     public void signUp(@RequestBody User user, HttpServletResponse response) {
         log.info("Sign Up....");
 

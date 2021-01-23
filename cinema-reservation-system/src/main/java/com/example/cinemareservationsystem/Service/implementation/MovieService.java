@@ -33,8 +33,8 @@ public class MovieService implements MovieServiceInterface {
     }
 
     @Override
-    public MovieInfoDto createMovie (MovieCreateDto movieCreateDto, String movieName) {
-        return movieMapper.toDto(movieRepository.save(movieMapper.toEntity(movieCreateDto, movieName)));
+    public MovieInfoDto createMovie (MovieCreateDto movieCreateDto) {
+        return movieMapper.toDto(movieRepository.save(movieMapper.toEntity(movieCreateDto)));
     }
 
     @Override
@@ -60,7 +60,12 @@ public class MovieService implements MovieServiceInterface {
     }
 
     @Override
-    public void updateMovie(int movieId, String movieName, String movieType, int movieRoom, int seatNumber) {
+    public void updateMovie(int movieId, String movieName,
+                            String movieType,
+                            int movieRoom,
+                            int seatNumber,
+                            String dateMovie,
+                            String priceMovie) {
         Optional<Movie> movieOptional = movieRepository.findById(movieId);
         if (!movieOptional.isPresent()) throw new EntityDoesNotExistsException("Movie, id= " + movieId);
 
@@ -69,13 +74,15 @@ public class MovieService implements MovieServiceInterface {
         movie.setMovieType(movieType);
         movie.setMovieRoom(movieRoom);
         movie.setSeatNumber(seatNumber);
+        movie.setDateMovie(dateMovie);
+        movie.setPriceMovie(priceMovie);
         movieRepository.save(movie);
     }
 
-    @Override
-    public void updateMovie(Movie movie) {
-        movieRepository.findById(movie.getMovieId());
-    }
+//    @Override
+//    public void updateMovie(Movie movie) {
+//        movieRepository.findById(movie.getMovieId());
+//    }
 
 
     @Override

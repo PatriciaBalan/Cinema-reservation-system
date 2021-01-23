@@ -11,12 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/cinema")
+@RequestMapping("/cinema/movie")
 public class MovieController {
 
     private static final Logger LOG = LoggerFactory.getLogger(MovieController.class);
@@ -27,49 +30,46 @@ public class MovieController {
     @Autowired
     private MovieRepository movieRepository;
 
-
-    @PostMapping(path = "/create")
-    public @ResponseBody String createMovie(@RequestBody MovieCreateDto mvtd) {
-        Movie movie = new Movie();
-        movie.setMovieName(mvtd.getMovieName());
-        movie.setMovieType(mvtd.getMovieType());
-        movie.setMovieRoom(mvtd.getMovieRoom());
-        movie.setSeatNumber(mvtd.getSeatNumber());
-        movie.setDateMovie(mvtd.getDateMovie());
-        movieRepository.save(movie);
-        return "Saved";
+    public MovieController(MovieService movieService, MovieRepository movieRepository) {
+        this.movieService = movieService;
+        this.movieRepository = movieRepository;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public List<MovieInfoDto> getAllMovie() {
         LOG.info("Fetch all the Movies...");
         return movieService.getAllMovie();
     }
 
-    @GetMapping ("movie/{movieId)")
-    public MovieInfoDto findById(int movieId) {
-        return movieService.findById(movieId);
+    @PostMapping(path = "/create")
+    ResponseEntity<MovieInfoDto> createMovie(@RequestBody MovieCreateDto mcd) {
+        return ResponseEntity.ok(movieService.createMovie(mcd));
     }
 
 
-    @PutMapping("/update/{movieId}")
-    public ResponseEntity<Movie> updateMovie(@PathVariable ("movieId") int movieId,
+    @GetMapping ("/{movieId}")
+    public MovieInfoDto findById(@PathVariable ("movieId") int movieId) {
+        return movieService.findById(movieId);
+    }
+
+    @PutMapping("/{movieId}")
+        public ResponseEntity<MovieInfoDto> updateMovie(@PathVariable ("movieId") int movieId,
                                              @RequestBody Movie movie) {
 
-        movieRepository.findById(movieId);
+        movieRepository.findById(movieId).get();
         movie.setMovieName(movie.getMovieName());
+        movie.setMovieId(movie.getMovieId());
         movie.setMovieRoom(movie.getMovieRoom());
         movie.setSeatNumber(movie.getSeatNumber());
         movie.setPriceMovie(movie.getPriceMovie());
         movie.setMovieType(movie.getMovieType());
-
+        movie.setDateMovie(movie.getDateMovie());
         movieRepository.save(movie);
-        movieService.updateMovie(movie);
         return ResponseEntity.ok().build();
     }
 
 
-    @DeleteMapping("movie/{movieId}")
+    @DeleteMapping("/{movieId}")
     public ResponseEntity<Void> deleteMovie(@PathVariable int movieId) {
     movieService.deleteMovie(movieId);
     return ResponseEntity.ok().build();

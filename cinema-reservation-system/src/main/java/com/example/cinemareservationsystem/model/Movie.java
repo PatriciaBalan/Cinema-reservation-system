@@ -28,7 +28,7 @@ public class Movie {
     private int seatNumber;
 
     @Column
-    private Date dateMovie;
+    private String dateMovie;
 
     @Column
     private String priceMovie;
@@ -40,7 +40,7 @@ public class Movie {
     }
 
     public Movie(int movieId, String movieName, String movieType,
-                 int movieRoom, Date dateMovie, int seatNumber, String priceMovie) {
+                 int movieRoom, String dateMovie, int seatNumber, String priceMovie) {
         this.movieId = movieId;
         this.movieName = movieName;
         this.movieType = movieType;
@@ -98,11 +98,11 @@ public class Movie {
         this.seatNumber = seatNumber;
     }
 
-    public Date getDateMovie() {
+    public String getDateMovie() {
         return dateMovie;
     }
 
-    public void setDateMovie(Date dateMovie) {
+    public void setDateMovie(String dateMovie) {
         this.dateMovie = dateMovie;
     }
 
